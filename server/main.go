@@ -13,14 +13,14 @@ import (
 	primeget "github.com/snavarro89/stablyprime/functions/prime/get"
 )
 
-//var application App
+var application app.App
 
 func init() {
 	if err := godotenv.Load("../environment/.env"); err != nil {
 		log.Print("No .env file found")
 	}
 
-	application := app.App{
+	application = app.App{
 		Data: app.Data{
 			Numbers: api.NumbersModel{DB: nil},
 		},
@@ -35,7 +35,7 @@ func main() {
 	methodsOk := handlers.AllowedMethods([]string{"GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"})
 
 	router := mux.NewRouter().StrictSlash(true)
-	primeget
+	primeget.Data(application)
 	router.HandleFunc("/prime/{number}", primeget.Mux).Methods("POST")
 
 	log.Fatal(http.ListenAndServe(":3001", handlers.CORS(originsOk, headersOk, methodsOk)(router)))

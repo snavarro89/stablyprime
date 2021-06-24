@@ -39,7 +39,7 @@ func TestNegative(t *testing.T) {
 		},
 	}
 	prime, err := app.Data.GetPrime(-2)
-	expect := "Incorrect input: Only posisitve numbers allowed"
+	expect := "Only posisitve numbers allowed"
 	if err == nil {
 		t.Fatalf(`GetPrime(-5) = %b, %v, want match for 0, %s`, prime, err, expect)
 	}

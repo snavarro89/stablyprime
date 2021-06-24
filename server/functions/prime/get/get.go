@@ -38,7 +38,16 @@ func handler(params H.Parameters) (interface{}, int) {
 		}
 		return errResponse, http.StatusBadRequest
 	}
-	prime, _ := app.Data.GetPrime(number)
+	prime, err := app.Data.GetPrime(number)
+
+	if err != nil {
+		errResponse := map[string]interface{}{
+			"error": true,
+			"desc":  err.Error(),
+			"code":  "1000",
+		}
+		return errResponse, http.StatusBadRequest
+	}
 
 	response := response{
 		PrimeNumber: prime,

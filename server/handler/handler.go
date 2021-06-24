@@ -15,6 +15,10 @@ type MuxResponse struct {
 	Handle Handle
 }
 
+type TestResponse struct {
+	Handle Handle
+}
+
 type Parameters struct {
 	Body        []byte
 	PathParams  map[string]string

@@ -11,7 +11,7 @@ func (NumbersModel) GetPrime(number int) (int, error) {
 	//Another approach would be to allow negative numbers and use the absolute value. For demostration purposes
 	//This api will not allow negative numbers.
 	if number < 0 {
-		return 0, errors.New("Incorrect input: Only positive numbers allowed")
+		return 0, errors.New("Only positive numbers allowed")
 	}
 
 	//If the number is either 0-3 then just return the same value as they are their own primes.
