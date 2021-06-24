@@ -44,7 +44,7 @@ func handler(params H.Parameters) (interface{}, int) {
 		errResponse := map[string]interface{}{
 			"error": true,
 			"desc":  err.Error(),
-			"code":  "1000",
+			"code":  "1001",
 		}
 		return errResponse, http.StatusBadRequest
 	}
