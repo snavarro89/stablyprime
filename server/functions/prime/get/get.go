@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/aws/aws-lambda-go/lambda"
 	A "github.com/snavarro89/stablyprime/app"
 	H "github.com/snavarro89/stablyprime/handler"
 )
@@ -21,6 +22,21 @@ func Mux(w http.ResponseWriter, r *http.Request) {
 		},
 	}
 	m.Callback(w, r)
+}
+
+func Aws(w http.ResponseWriter, r *http.Request) {
+
+	a := H.AwsResponse{
+		Handle: func(params *H.Parameters) (interface{}, int) {
+			return handler(*params)
+		},
+		Headers: H.Headers{
+			Origin:  "*",
+			Methods: "GET,DELETE",
+			Headers: "Access-Control-Allow-Headers,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+		},
+	}
+	lambda.Start(a.Callback)
 }
 
 type response struct {
