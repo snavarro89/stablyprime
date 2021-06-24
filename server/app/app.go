@@ -8,18 +8,10 @@ type App struct {
 	Data Data
 }
 
-type Prime interface {
-	Get(number int) int
+type Numbers interface {
+	GetPrime(number int) (int, error)
 }
 
 type Data struct {
-	Prime
-}
-
-type Parameters struct {
-	Body []byte
-}
-
-type GetPrime interface {
-	GetPrime(Parameters)
+	Numbers
 }

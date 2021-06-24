@@ -8,6 +8,8 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 
+	api "github.com/snavarro89/stablyprime/api/numbers"
+	app "github.com/snavarro89/stablyprime/app"
 	primeget "github.com/snavarro89/stablyprime/functions/prime/get"
 )
 
@@ -16,6 +18,12 @@ import (
 func init() {
 	if err := godotenv.Load("../environment/.env"); err != nil {
 		log.Print("No .env file found")
+	}
+
+	application := app.App{
+		Data: app.Data{
+			Numbers: api.NumbersModel{DB: nil},
+		},
 	}
 
 }
@@ -27,6 +35,7 @@ func main() {
 	methodsOk := handlers.AllowedMethods([]string{"GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"})
 
 	router := mux.NewRouter().StrictSlash(true)
+	primeget
 	router.HandleFunc("/prime/{number}", primeget.Mux).Methods("POST")
 
 	log.Fatal(http.ListenAndServe(":3001", handlers.CORS(originsOk, headersOk, methodsOk)(router)))

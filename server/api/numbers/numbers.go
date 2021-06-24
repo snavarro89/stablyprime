@@ -2,7 +2,11 @@ package numbers
 
 import "errors"
 
-func GetPrime(number int) (int, error) {
+type NumbersModel struct {
+	DB interface{} // <-- This can be any database you want to run queries against.
+}
+
+func (NumbersModel) GetPrime(number int) (int, error) {
 	//We will only process positive integers.
 	//Another approach would be to allow negative numbers and use the absolute value. For demostration purposes
 	//This api will not allow negative numbers.
