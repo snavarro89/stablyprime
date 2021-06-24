@@ -2,6 +2,7 @@ package prime
 
 import (
 	"net/http"
+	"strconv"
 
 	A "github.com/snavarro89/stablyprime/api/numbers"
 	H "github.com/snavarro89/stablyprime/handler"
@@ -22,7 +23,16 @@ type Response struct {
 
 func handler(params H.Parameters) (interface{}, int) {
 
-	prime := A.GetPrime(0)
+	number, err := strconv.Atoi(params.PathParams["number"])
+	if err != nil {
+		errResponse := map[string]interface{}{
+			"error": true,
+			"desc":  "Please provide a valid number",
+			"code":  "1000",
+		}
+		return errResponse, http.StatusBadRequest
+	}
+	prime, _ := A.GetPrime(number)
 
 	response := Response{
 		PrimeNumber: prime,

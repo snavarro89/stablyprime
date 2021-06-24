@@ -27,7 +27,7 @@ func main() {
 	methodsOk := handlers.AllowedMethods([]string{"GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"})
 
 	router := mux.NewRouter().StrictSlash(true)
-	router.HandleFunc("/prime", primeget.Mux).Methods("POST")
+	router.HandleFunc("/prime/{number}", primeget.Mux).Methods("POST")
 
 	log.Fatal(http.ListenAndServe(":3001", handlers.CORS(originsOk, headersOk, methodsOk)(router)))
 

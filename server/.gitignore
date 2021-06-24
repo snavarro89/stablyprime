@@ -1,0 +1,27 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/bin
+/mux/bin
+/build
+
+# environment files
+/environment
+*.env
+
+# IDEs and editors
+.serverless
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+
+# System Files
+.DS_Store
+Thumbs.db
+
+*.exe
