@@ -32,7 +32,6 @@ export class PrimeService {
       // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.error.desc}`;
     }
-    console.log(errorMessage)
     return throwError(errorMessage);
  }
 }

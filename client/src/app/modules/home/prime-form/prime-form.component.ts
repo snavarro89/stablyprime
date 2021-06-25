@@ -9,7 +9,7 @@ import { Validators } from '@angular/forms';
 })
 export class PrimeFormComponent implements OnInit {
 
-  @Output() submitPrime: EventEmitter<number> = new EventEmitter<number>();
+  @Output() submitValue: EventEmitter<number> = new EventEmitter<number>();
 
 
   primeForm =  new FormGroup({})
@@ -27,7 +27,7 @@ export class PrimeFormComponent implements OnInit {
   get number() { return this.primeForm.get('number'); }
 
   submit(): void{
-    //emit the event back to the parent component.
+    this.submitValue.emit(this.number?.value)
   }
 
 }

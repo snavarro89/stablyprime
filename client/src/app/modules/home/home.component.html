@@ -1,3 +1,13 @@
 <div class="flex md:justify-center min-w-0 m-6 sm:flex-col md:flex-row">
-    <prime-form class=" md:h-180 w-3/4 border rounded-2xl overflow-auto shadow-lg p-6 sm:w-1/2 sm:h-100"></prime-form> 
+    <prime-form (submitValue)="submitValue($event)"class=" md:h-180 w-3/4 border rounded-2xl overflow-auto shadow-lg p-6 sm:w-1/2 sm:h-100"></prime-form> 
 </div>
+
+<div *ngIf="primeResponse$ | async as primeResponse; else Error" class="flex md:justify-center min-w-0 m-6 sm:flex-col md:flex-row">
+    {{primeResponse.primeNumber}}
+</div>
+
+<ng-template #Error>
+    <div *ngIf="loadingError$ | async" class="flex md:justify-center min-w-0 m-6 sm:flex-col md:flex-row">
+        Error fetching data from the server
+    </div>
+</ng-template>

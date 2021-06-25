@@ -1,6 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { PrimeResponse } from 'app/models/http/prime-response';
 import { PrimeService } from 'app/services/prime.service';
+import { Observable, of, Subject, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -9,12 +12,22 @@ import { PrimeService } from 'app/services/prime.service';
 })
 export class HomeComponent implements OnInit {
 
+  primeResponse$: Observable<PrimeResponse> | undefined
+  loadingError$ = new Subject<boolean>();
+
   constructor(private _primeService: PrimeService) { }
 
   ngOnInit(): void {
-    this._primeService.getLargestPrime(-2).subscribe( (primeResponse: PrimeResponse) => {
-      console.log(primeResponse)
-    })
+    
+  }
+
+  submitValue(number: number): void{
+    this.primeResponse$ = this._primeService.getLargestPrime(number).pipe(
+      catchError((error: HttpErrorResponse) => {
+          this.loadingError$.next(true)
+          return throwError(error)
+      })
+    )
   }
 
 }
