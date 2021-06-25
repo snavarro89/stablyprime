@@ -22,7 +22,12 @@ func (NumbersModel) GetPrime(number int) (int, error) {
 		return 0, errors.New(fmt.Sprintf("There are no prime numbers before %d", number))
 	}
 
-	number--
+	//If number is even it is not prime, if the input number is even just decrease by 1 its value.
+	if number%2 == 0 {
+		number--
+	} else {
+		number -= 2
+	}
 
 	result := -1
 	isPrime := true
