@@ -30,7 +30,7 @@ export class PrimeService {
       errorMessage = error.error.message;
     } else {
       // Get server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.error.desc}`;
+      errorMessage = `${error.error.desc}`;
     }
     return throwError(errorMessage);
  }

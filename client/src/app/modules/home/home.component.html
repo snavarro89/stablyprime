@@ -9,7 +9,8 @@
 </div>
 
 <ng-template #Error>
-    <div *ngIf="loadingError$ | async" class="flex md:justify-center min-w-0 m-6 sm:flex-col md:flex-row">
-        <div class="text-red-600">Error fetching data from the server</div>
+    <div *ngIf="loadingError$ | async as err" class="flex md:justify-center min-w-0 m-6 sm:flex-col md:flex-row">
+        <div *ngIf="err==''" class="text-red-600">Error fetching data from the server</div>
+        <div *ngIf="err!=''" class="text-red-600">{{err}}</div>
     </div>
 </ng-template>

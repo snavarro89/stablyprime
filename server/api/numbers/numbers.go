@@ -24,11 +24,6 @@ func (NumbersModel) GetPrime(number int) (int, error) {
 
 	number--
 
-	//If number is even it is not prime, if the input number is even just decrease by 1 its value.
-	if number%2 == 0 {
-		number--
-	}
-
 	result := -1
 	isPrime := true
 	//First Approach: Start iterating from the top for each number starting with n-1 (or n-2 in case it was an odd number) I
