@@ -23,7 +23,9 @@ func (NumbersModel) GetPrime(number int) (int, error) {
 	}
 
 	//If number is even it is not prime, if the input number is even just decrease by 1 its value.
-	if number%2 == 0 {
+	//I will hardcode the three in here to save one iteration when entering an odd number or else I would have to
+	//iterate the first even number as well. The problem is that 2 is the only even prime number in the list.
+	if number%2 == 0 || number == 3 {
 		number--
 	} else {
 		number -= 2
