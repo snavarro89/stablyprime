@@ -36,6 +36,16 @@ bin/mux
 Browse for http://localhost:4200 to view the application.
 The API is running on http://localhost:3001
 
+## Docker
+
+To build and run using docker 
+
+```sh
+git clone https://github.com/snavarro89/stablyprime
+cd stablyprime
+docker-compose up --build
+```
+
 ## Testing
 **Client**
 Angular tests have not been created yet
@@ -176,3 +186,5 @@ scripts/deploy.sh
  - Containirize the application
  - Create infrastructure scripts for automatic first-time deploying
  - Create CI/CD scripts for automatic test and deploy
+ - There is a lag on production when loading the UI elements appear all to the left for 1 second
+ - When clearing the input there is a lag between clearing the input and loading the answer/error
