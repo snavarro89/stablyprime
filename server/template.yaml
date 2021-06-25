@@ -1,0 +1,27 @@
+Parameters:
+
+  ENV_VARIABLES: "false"
+    
+Resources:
+    PrimeGet:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: bin/exe/prime/get
+        Runtime: go1.x
+        Timeout: 5
+        Environment:
+          Variables:
+            ENV_VARIABLES: !Ref ENV_VARIABLES
+        Events:
+          Get:
+            Type: Api
+            Properties:
+              Path: /prime/{number}
+              CodeUri: bin/deploy/prime/get.zip
+              Method: get
+          Options:
+            Type: Api
+            Properties:
+              Path: /prime/{number}
+              CodeUri: bin/deploy/prime/get.zip
+              Method: options
