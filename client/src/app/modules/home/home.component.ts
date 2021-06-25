@@ -13,7 +13,8 @@ import { catchError } from 'rxjs/operators';
 export class HomeComponent implements OnInit {
 
   primeResponse$: Observable<PrimeResponse> | undefined
-  loadingError$ = new Subject<boolean>();
+  loadingError$ = new Subject<boolean>()
+  number: number | undefined
 
   constructor(private _primeService: PrimeService) { }
 
@@ -22,7 +23,9 @@ export class HomeComponent implements OnInit {
   }
 
   submitValue(number: number): void{
+    this.number = number
     this.primeResponse$ = this._primeService.getLargestPrime(number).pipe(
+      
       catchError((error: HttpErrorResponse) => {
           this.loadingError$.next(true)
           return throwError(error)

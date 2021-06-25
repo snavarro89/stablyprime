@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Validators } from '@angular/forms';
 
@@ -19,15 +20,20 @@ export class PrimeFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.primeForm = this._formBuilder.group({
-      number: ['', [Validators.required, positiveIntegerValidator()]]
-    })
+    this.primeForm = this.createForm()
   }
 
   get number() { return this.primeForm.get('number'); }
 
   submit(): void{
     this.submitValue.emit(this.number?.value)
+    this.primeForm = this.createForm()
+  }
+
+  createForm(): FormGroup{
+    return this._formBuilder.group({
+      number: ['', [Validators.required, positiveIntegerValidator()]]
+    })
   }
 
 }
