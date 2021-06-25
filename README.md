@@ -61,6 +61,7 @@ go test ./...
 The server can be run on a virtual server (on prem, localhost, ec2, etc...) or as serverless functions
 
 **Virtual Server**
+
 The application uses [Gorilla Mux](https://github.com/gorilla/mux) package to handle http requests
 To build the application run
 ```sh
@@ -77,6 +78,7 @@ GOOS=linux GOARCH=amd64 go build -o bin/mux
 ```
 
 **Serverless**
+
 The application also works for serverless architecture, you can build the whole app or you can build and deploy
 specific functions.
 
@@ -96,7 +98,8 @@ This script gets the subfolder and function name and compiles only one fuction.
 
 AWS Server Folder structure
 All lambdas are declared inside the "aws" folder, a subfolder groups functions that are relevant between them, 
-for example: 
+for example:
+
 &nbsp;aws
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|__ user
@@ -106,6 +109,8 @@ for example:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|__ create
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|__ update
+
+If you add those functions you could run `scripts/build_one.sh user get` to just compile 1 function.
 
 
 To run your lambda locally, you can use [aws sam](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-local-start-api.html)
@@ -117,12 +122,13 @@ sam local start-api
 To deploy your lambdas to AWS you need to have IAM user with valid credentials, more info on [Serverless](https://www.serverless.com/framework/docs/providers/aws/guide/credentials/)
 Update your ` ~/.aws/credentials` to add a profile, by default the app needs a profile called `aws-stably-test`, 
 this could be change on your `serverless.yaml` file
-If you have defined more than one environment file, you coud run
+If you wan to have multiple services deployed to aws you can run 
 ```sh
 sls deploy --stage production
 sls deploy --stage stage
 sls deploy --stage dev
 ```
+For each you could also specify their own environment variable file `.env.stage` on the enviroment folder.
 
 To deploy a single function
 ```sh
@@ -131,7 +137,9 @@ sls deploy --stage production --function prime_get
 Where `prime_get` is the name of the function defined in the `serverless.yaml` file
 
 ## Client
+
 The client has the following structure
+
 &nbsp;src
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|__ app
@@ -147,24 +155,29 @@ The client has the following structure
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|__ shared
 
 **Layout**
+
 The layout module is responsible for determining the general look and feel of the application, any header
 footer, navigation should be included in his module, the application has the ability to include multiple layouts. 
 TODO: Add a service to automatically set layout for all the application.
 
 **Models**
+
 All object models, http requests and http response interfaces should be included in this folder, having a model for
 everything prevents the developer to type everything with `any`
 
 **Modules**
+
 Inside the modules folder we should include all the different pages (components) that will be included in our application
 The project includes Angular Routing so that the Layout can be lodaded first and then LazyLoad whatever module we need
 based on the route. 
 
 **Services**
+
 The application uses rxjs to preserve state, all services for HTTP Requests and state objects should be added here. 
 TODO: Implement ngrx store.
 
 **Deploy**
+
 To build for production and deploy, a valid [S3 static site](https://docs.aws.amazon.com/AmazonS3/latest/userguide/HostingWebsiteOnS3Setup.html) bucket should exist on your AWS Account, IAM credentials with S3 permissions should be added to ` ~/.aws/credentials`, and a valid Cloudfront Distribution should be created referencing the S3 Bucket
 TODO: Create a cloudformation script to create permissions, bucket and cloudfront distribution
 Once you have the required information, update the `stablyprime/client/scripts/deploy.sh` script
@@ -179,6 +192,7 @@ npm run build
 scripts/deploy.sh
 ```
 **TODO**
+
  - Add tests to Angular
  - Add Security validation on server side (Allow server to process JWT Tokens or oAuth with provider)
  - Implement ngrx on frontend
