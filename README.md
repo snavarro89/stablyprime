@@ -188,3 +188,4 @@ scripts/deploy.sh
  - Create CI/CD scripts for automatic test and deploy
  - There is a lag on production when loading the UI elements appear all to the left for 1 second
  - When clearing the input there is a lag between clearing the input and loading the answer/error
+ - Update Favicon
