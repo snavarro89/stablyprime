@@ -3,8 +3,9 @@
 Stably Prime Numbers is a cloud enabled app to answer which is the highest prime number lower than N.
 
 [Demo App](https://d3n9yivspffmez.cloudfront.net/home)
+
 API Url
- https://keegq1szu9.execute-api.us-east-1.amazonaws.com/production/prime/{number}
+https://keegq1szu9.execute-api.us-east-1.amazonaws.com/production/prime/{number}
 
 ## Tech Stack
 
@@ -87,10 +88,15 @@ AWS Server Folder structure
 All lambdas are declared inside the "aws" folder, a subfolder groups functions that are relevant between them, 
 for example: 
 &nbsp;aws
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|__ user
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|__ get
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|__ create
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|__ update
+
 
 To run your lambda locally, you can use [aws sam](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-local-start-api.html)
 ```sh
