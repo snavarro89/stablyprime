@@ -1,0 +1,22 @@
+
+    <form [formGroup]="primeForm" (ngSubmit)="submit()" class="bg-white  px-8 pt-6 pb-8 mb-4">
+    <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+        Input number
+        </label>
+        <input formControlName="number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="number" name="number" type="number" placeholder="Number">
+        <small class="text-red-600"
+            *ngIf="number?.errors?.required && (number?.touched || number?.dirty)">
+            This field is required.
+        </small>
+        <small class="text-red-600"
+            *ngIf="number?.errors?.invalidNumber && (number?.touched || number?.dirty)">
+            This api only accepts positive integers
+        </small>
+    </div>
+    <div class="flex items-center justify-between">
+        <button type="submit" [disabled]="!primeForm.valid" [ngClass]="{'bg-gray-200': !primeForm.valid, 'bg-blue-500 hover:bg-blue-400': primeForm.valid }" class=" text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        Submit
+        </button>
+    </div>
+    </form>
