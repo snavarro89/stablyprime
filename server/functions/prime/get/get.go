@@ -24,7 +24,7 @@ func Mux(w http.ResponseWriter, r *http.Request) {
 	m.Callback(w, r)
 }
 
-func Aws(w http.ResponseWriter, r *http.Request) {
+func Aws() {
 
 	a := H.AwsResponse{
 		Handle: func(params *H.Parameters) (interface{}, int) {
@@ -32,7 +32,7 @@ func Aws(w http.ResponseWriter, r *http.Request) {
 		},
 		Headers: H.Headers{
 			Origin:  "*",
-			Methods: "GET,DELETE",
+			Methods: "GET, OPTIONS",
 			Headers: "Access-Control-Allow-Headers,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
 		},
 	}

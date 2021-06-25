@@ -36,7 +36,7 @@ func main() {
 
 	router := mux.NewRouter().StrictSlash(true)
 	primeget.Data(application)
-	router.HandleFunc("/prime/{number}", primeget.Mux).Methods("POST")
+	router.HandleFunc("/prime/{number}", primeget.Mux).Methods("GET")
 
 	log.Fatal(http.ListenAndServe(":3001", handlers.CORS(originsOk, headersOk, methodsOk)(router)))
 

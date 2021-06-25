@@ -1,0 +1,52 @@
+service:  stablyPrimeNumbers
+
+plugins: 
+  - serverless-dotenv-plugin
+  - serverless-plugin-split-stacks
+
+custom:
+  dotenv:
+    basePath: ./environment/
+  splitStacks:
+      perFunction: true
+      perType: true
+      perGroupFunction: false
+
+provider:
+  name: aws
+  runtime: go1.x
+  stage: ${opt:stage, 'dev'}
+  profile: aws-stably-test
+  versionFunctions: false
+
+  environment:
+    NO_VARS: "true"
+
+package:
+  individually: true
+
+functions: 
+  prime_get:
+    handler: bin/exe/prime/get
+    package:
+      exclude: 
+        - ./**
+      include:
+        - ./bin/exe/prime/get
+    events:
+      - http:
+          path: prime/{number}
+          method: get
+          cors: 
+            enabled: true
+            origin: '*'
+            headers:
+              - Access-Control-Allow-Origin
+              - Access-Control-Allow-Methods
+              - Access-Control-Allow-Headers
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
