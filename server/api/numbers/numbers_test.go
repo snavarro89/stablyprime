@@ -1,6 +1,7 @@
 package numbers
 
 import (
+	"fmt"
 	"testing"
 
 	A "github.com/snavarro89/stablyprime/app"
@@ -13,9 +14,9 @@ func TestZero(t *testing.T) {
 		},
 	}
 	prime, err := app.Data.GetPrime(0)
-	expect := 0
-	if err != nil || prime != 0 {
-		t.Fatalf(`GetPrime(0) = %b, %v, want match for %b, nil`, prime, err, expect)
+	expectError := fmt.Sprintf("There are no prime numbers before %d", 0)
+	if err == nil || prime != 0 {
+		t.Fatalf(`GetPrime(1) = %b, %v, want match for %b, %v`, prime, err, 0, expectError)
 	}
 }
 
@@ -26,9 +27,10 @@ func TestOne(t *testing.T) {
 		},
 	}
 	prime, err := app.Data.GetPrime(1)
-	expect := 1
-	if err != nil || prime != 1 {
-		t.Fatalf(`GetPrime(1) = %b, %v, want match for %b, nil`, prime, err, expect)
+	expect := 0
+	expectError := fmt.Sprintf("There are no prime numbers before %d", 1)
+	if err == nil || prime != 0 {
+		t.Fatalf(`GetPrime(1) = %b, %v, want match for %b, %v`, prime, err, expect, expectError)
 	}
 }
 

@@ -1,6 +1,9 @@
 package numbers
 
-import "errors"
+import (
+	"errors"
+	"fmt"
+)
 
 type NumbersModel struct {
 	DB interface{} // <-- This can be any database you want to run queries against.
@@ -14,9 +17,9 @@ func (NumbersModel) GetPrime(number int) (int, error) {
 		return 0, errors.New("Only positive numbers allowed")
 	}
 
-	//If the number is either 0-3 then just return the same value as they are their own primes.
-	if number <= 3 {
-		return number, nil
+	//If the number is either 0 or 2 then there are no prime numbers before this numbers
+	if number < 3 {
+		return 0, errors.New(fmt.Sprintf("There are no prime numbers before %d", number))
 	}
 
 	number--
