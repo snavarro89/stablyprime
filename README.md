@@ -2,6 +2,10 @@
 
 Stably Prime Numbers is a cloud enabled app to answer which is the highest prime number lower than N.
 
+[Demo App](https://d3n9yivspffmez.cloudfront.net/home)
+API Url
+ https://keegq1szu9.execute-api.us-east-1.amazonaws.com/production/prime/{number}
+
 ## Tech Stack
 
 Frontend: Angular 12 + Tailwind CSS
