@@ -14,9 +14,9 @@ func TestZero(t *testing.T) {
 		},
 	}
 	prime, err := app.Data.GetPrime(0)
-	expect := 0
-	if err != nil || prime != 0 {
-		t.Fatalf(`GetPrime(0) = %b, %v, want match for %b, nil`, prime, err, expect)
+	expectError := fmt.Sprintf("There are no prime numbers before %d", 0)
+	if err == nil || prime != 0 {
+		t.Fatalf(`GetPrime(1) = %b, %v, want match for %b, %v`, prime, err, 0, expectError)
 	}
 }
 
